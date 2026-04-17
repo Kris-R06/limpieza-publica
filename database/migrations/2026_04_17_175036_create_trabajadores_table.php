@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nombre', 255);
-            //id tipo trabajador
-            //$table->unsignedBigInteger('tipo_trabajador_id')->nullable();
-            //$table->foreign('tipo_trabajador_id')->references('id')->on('tipos_trabajadores');
+            $table->unsignedBigInteger('tipo_trabajador_id')->nullable();
+            $table->foreign('tipo_trabajador_id')->references('id')->on('tipos_trabajadores');
         });
     }
 
