@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nombre', 255);
             $table->unsignedBigInteger('tipo_unidad_id');
-            $table->foreign('tipo_unidad_id')->references('id')->on('tipos_unidades');
+            $table->foreign('tipo_unidad_id')->references('id')->on('tipo_unidades');
             $table->integer('numero');
         });
     }
