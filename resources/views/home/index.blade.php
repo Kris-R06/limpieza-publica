@@ -1,9 +1,7 @@
 @extends('layout.admin')
 @section('content')
 
-{{-- ══════════════════════════════════════════════
-     DASHBOARD (Tema Claro)
-═══════════════════════════════════════════════ --}}
+{{-- DASHBOARD --}}
 <section class="animate-fade-up">
 
   {{-- Título --}}
@@ -160,4 +158,4 @@
   </div>
 
 </section>
-@endsection
+@endsection 

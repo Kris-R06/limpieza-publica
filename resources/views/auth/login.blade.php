@@ -23,7 +23,7 @@
 </head>
 <body class="bg-eco-light text-gray-800 font-sans antialiased min-h-screen flex items-center justify-center p-4">
 
-    <main class="bg-white rounded-2xl shadow-xl flex w-full max-w-5xl overflow-hidden min-h-[600px]">
+    <main class="bg-white rounded-2xl shadow-xl flex w-full max-w-5xl overflow-hidden min-h-100vh">
         
         <section class="hidden md:block md:w-1/2 relative">
             <div class="absolute inset-0 bg-eco-dark/30 z-10 mix-blend-multiply"></div>
@@ -56,7 +56,7 @@
                         <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
                         <input type="email" id="email" name="email" required 
                             class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors" 
-                            placeholder="operador@ciudad.gob">
+                            placeholder="operador@gmail.com">
                     </div>
 
                     <div>

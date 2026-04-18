@@ -42,7 +42,7 @@
   {{-- Éxito --}}
   @if(session('success'))
     <div class="mb-6 bg-brand-950 border border-brand-700 rounded-xl px-5 py-4 flex items-center gap-3">
-      <svg class="w-5 h-5 text-brand-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-5 h-5 text-brand-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
       </svg>
       <p class="text-sm text-brand-300">{{ session('success') }}</p>
@@ -66,7 +66,7 @@
         <div>
           <label for="fecha_orden"
                  class="flex items-center gap-1.5 text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0"></span>
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
             Fecha de orden
           </label>
           <input type="date" id="fecha_orden" name="fecha_orden" required
@@ -92,7 +92,7 @@
         <div>
           <label for="turno"
                  class="flex items-center gap-1.5 text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0"></span>
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
             Turno
           </label>
           <div class="relative">
@@ -117,7 +117,7 @@
         <div>
           <label for="ruta"
                  class="flex items-center gap-1.5 text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0"></span>
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
             Ruta
           </label>
           <div class="relative">
@@ -181,7 +181,7 @@
         <div>
           <label for="chofer"
                  class="flex items-center gap-1.5 text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0"></span>
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
             Chofer
           </label>
           <div class="relative">
@@ -230,7 +230,7 @@
         <div>
           <label for="unidades"
                  class="flex items-center gap-1.5 text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0"></span>
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
             Unidades
           </label>
           <div class="relative">
@@ -269,7 +269,7 @@
         <div>
           <label for="cantidad"
                  class="flex items-center gap-1.5 text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0"></span>
+            <span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
             Cantidad
           </label>
           <input type="number" id="cantidad" name="cantidad" min="0" required
