@@ -57,26 +57,44 @@
   </div>
 
   {{-- Navegación --}}
-  <nav class="flex-1 px-3 py-5 space-y-1 overflow-y-auto">
-    <p class="px-3 mb-3 text-md font-bold text-brand-400 tracking-[0.2em] uppercase">Menú Principal</p>
-    <a href="{{ route('home') }}" @class([
-         'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
-         'bg-brand-800 border-l-brand-400 text-white' => request()->routeIs('home'),
-         'border-l-transparent text-brand-100 hover:bg-brand-800/50' => !request()->routeIs('home'),
-       ])>
-      <i class="ph ph-house text-xl"></i> Inicio
-    </a>
-    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium border-l-[3px] border-l-transparent text-brand-100 hover:bg-brand-800/50">
-      <i class="ph ph-file-text text-xl"></i> Formulario
-    </a>
-    {{-- Botón de cerrar sesión --}}
-    <form action="{{ route('logout') }}" method="POST">
-      @csrf
-      <button type="submit" class="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium border-l-[3px] border-l-transparent text-brand-100 hover:bg-red-500/40">
-        <i class="ph ph-sign-out text-xl"></i> Cerrar sesión
-      </button>
-    </form>
-  </nav>
+	<nav class="flex-1 px-3 py-5 space-y-1 overflow-y-auto">
+		<p class="px-3 mb-3 text-md font-bold text-brand-400 tracking-[0.2em] uppercase">Menú Principal</p>
+		<a href="{{ route('home') }}" 
+		@class([
+			'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
+			'bg-brand-800 border-l-brand-400 text-white shadow-inner' => request()->routeIs('home'),
+			'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('home'),
+		])>
+		<i class="ph ph-house text-xl"></i> Inicio
+		</a>
+		<a href="#" 
+		@class([
+			'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
+			'bg-brand-800 border-l-brand-400 text-white shadow-inner' => request()->routeIs('formulario.*'),
+			'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('formulario.*'),
+		])>
+		<i class="ph ph-file-text text-xl"></i> Formulario
+		</a>
+		<a href="{{ route('rutas.index') }}" 
+		@class([
+			'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
+			'bg-brand-800 border-l-brand-400 text-white shadow-inner' => request()->routeIs('rutas.*'),
+			'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('rutas.*'),
+		])>
+		<i class="ph ph-chart-bar text-xl"></i> Rutas
+		</a>
+
+		{{-- Separador Visual --}}
+		<div class="my-4 border-t border-brand-800/50"></div>
+		<form action="{{ route('logout') }}" method="POST">
+		@csrf
+		<button type="submit" 
+				class="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium border-l-[3px] border-l-transparent text-brand-100 hover:bg-red-500/20 hover:text-red-400 transition-colors group">
+			<i class="ph ph-sign-out text-xl group-hover:translate-x-1 transition-transform"></i> 
+			Cerrar sesión
+		</button>
+		</form>
+	</nav>
 
   {{-- Info de usuario --}}
   <div class="px-4 py-4 border-t border-brand-800/50 bg-brand-950/30">

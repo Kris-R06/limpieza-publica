@@ -16,11 +16,12 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index']) ->name('home');
     Route::post('/logout', [AuthController::class, 'logout']) ->name('logout');
-});
 
+    #Rutas para la gestión de rutas
     Route::get('/rutas', [RutaController::class, 'index'])->name('rutas.index');
     Route::get('/rutas/create', [RutaController::class, 'create'])->name('rutas.create');
     Route::post('/rutas', [RutaController::class, 'store'])->name('rutas.store');
     Route::get('/rutas/{id}/edit', [RutaController::class, 'edit'])->name('rutas.edit');
     Route::put('/rutas/{id}', [RutaController::class, 'update'])->name('rutas.update');
     Route::delete('/rutas/{id}', [RutaController::class, 'destroy'])->name('rutas.destroy');
+});

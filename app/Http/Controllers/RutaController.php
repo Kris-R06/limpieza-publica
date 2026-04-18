@@ -22,6 +22,9 @@ class RutaController extends Controller
     {
         $request->validate([
             'numero' => 'required|unique:rutas',
+        ], [
+            'numero.required' => 'El número de ruta es obligatorio.',
+            'numero.unique' => 'Ya existe una ruta con este número. Por favor, elige otro.',
         ]);
 
         $ruta = new Ruta();
@@ -41,6 +44,9 @@ class RutaController extends Controller
     {
         $request->validate([
             'numero' => 'required|unique:rutas,numero,' . $id,
+        ], [
+            'numero.required' => 'El número de ruta es obligatorio.',
+            'numero.unique' => 'Ya existe una ruta con este número. Por favor, elige otro.',
         ]);
 
         $ruta = Ruta::findOrFail($id);
