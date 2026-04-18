@@ -5,8 +5,8 @@
     {{-- ENCABEZADO DE PÁGINA --}}
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-            <h1 class="font-heading text-3xl font-bold text-slate-900 uppercase tracking-tight">Lista de Rutas</h1>
-            <p class="text-sm text-slate-500">Administración de trayectos de limpieza para el municipio de Mataranch.</p>
+            <h1 class="font-heading text-3xl sm:text-4xl font-extrabold text-brand-850 tracking-wide">Lista de Rutas Activas</h1>
+            <p class="text-sm text-slate-500">Administración de las rutas de limpieza activas del municipio.</p>
         </div>
         
         <a href="{{ route('rutas.create') }}" 
