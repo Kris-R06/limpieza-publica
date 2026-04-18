@@ -13,6 +13,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   
+  <style>
+    html {
+    font-size: 115%; 
+    }
+  </style>
+
   <script>
     tailwind.config = {
       theme: {
@@ -28,19 +34,8 @@
             slate: { 950: '#020617' },
           },
           fontFamily: {
-            // Para títulos, botones grandes y menús
             heading: ['"Barlow Condensed"', 'sans-serif'],
-            // Para párrafos, tablas y textos normales
-            body: ['"Barlow"', 'sans-serif'],
-          },
-          animation: {
-            'fade-up': 'fadeUp 0.4s ease-out both',
-          },
-          keyframes: {
-            fadeUp: {
-              from: { opacity: '0', transform: 'translateY(16px)' },
-              to:   { opacity: '1', transform: 'translateY(0)' },
-            },
+            body:    ['"Barlow"', 'sans-serif'],
           },
         },
       },
@@ -48,114 +43,91 @@
   </script>
 </head>
 <body class="font-body bg-gray-50 text-slate-800 min-h-screen flex flex-col">
+{{-- OVERLAY SIDEBAR --}}
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/40 z-20 hidden opacity-0 transition-opacity duration-300"></div>
 
-{{--OVERLAY SIDEBAR (móvil)--}}
-<div id="sidebar-overlay"
-     class="fixed inset-0 bg-black/40 z-20 hidden opacity-0 transition-opacity duration-300">
-</div>
-
-{{--SIDEBAR--}}
-<aside id="sidebar"
-       class="fixed top-0 left-0 h-full w-64 z-30 flex flex-col
-              bg-brand-850 text-white shadow-xl
-              transition-transform duration-300 ease-in-out
-              -translate-x-full md:translate-x-0">
-
-  {{-- Brand (Ajustado para fondo oscuro) --}}
+{{-- SIDEBAR --}}
+<aside id="sidebar" class="fixed top-0 left-0 h-full w-64 z-50 flex flex-col bg-brand-850 text-white shadow-xl transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0">
+  {{-- Brand --}}
   <div class="flex items-center gap-3 px-5 py-5 border-b border-brand-800/50">
     <div class="w-9 h-9 rounded-lg bg-brand-200 flex items-center justify-center shrink-0 border border-white">
       <i class="ph ph-trash text-xl text-brand-850"></i>
     </div>
-    <div>
-      <p class="font-heading text-xl font-bold text-white tracking-wide leading-tight uppercase">Sistema de Limpieza</p>
-    </div>
+    <p class="font-heading text-xl font-bold text-white tracking-wide leading-tight uppercase">Sistema de Limpieza</p>
   </div>
 
-  {{-- Navegación (Ajustada para fondo oscuro) --}}
-  <nav class="flex-1 px-3 py-5 space-y-1 overflow-y-auto" aria-label="Menú lateral">
-    <p class="px-3 mb-3 text-[10px] font-bold text-brand-400 tracking-[0.2em] uppercase">Menú Principal</p>
-
-    {{-- Inicio --}}
-    <a href="{{ route('home') }}"
-       @class([
-         'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-150 border-l-[3px]',
-         'bg-brand-800 border-l-brand-400 text-white shadow-inner' => request()->routeIs('home'),
-         'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('home'),
+  {{-- Navegación --}}
+  <nav class="flex-1 px-3 py-5 space-y-1 overflow-y-auto">
+    <p class="px-3 mb-3 text-md font-bold text-brand-400 tracking-[0.2em] uppercase">Menú Principal</p>
+    <a href="{{ route('home') }}" @class([
+         'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
+         'bg-brand-800 border-l-brand-400 text-white' => request()->routeIs('home'),
+         'border-l-transparent text-brand-100 hover:bg-brand-800/50' => !request()->routeIs('home'),
        ])>
-      <i class="ph ph-house text-lg shrink-0"></i>
-      Inicio
+      <i class="ph ph-house text-xl"></i> Inicio
     </a>
-
-    {{-- Formulario --}}
-    <a href="#"
-       @class([
-         'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-150 border-l-[3px]',
-         'bg-brand-800 border-l-brand-400 text-white shadow-inner' => request()->routeIs('formulario'),
-         'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('formulario'),
-       ])>
-      <i class="ph ph-file-text text-lg shrink-0"></i>
-      Formulario
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium border-l-[3px] border-l-transparent text-brand-100 hover:bg-brand-800/50">
+      <i class="ph ph-file-text text-xl"></i> Formulario
     </a>
+    {{-- Botón de cerrar sesión --}}
+    <form action="{{ route('logout') }}" method="POST">
+      @csrf
+      <button type="submit" class="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium border-l-[3px] border-l-transparent text-brand-100 hover:bg-red-500/40">
+        <i class="ph ph-sign-out text-xl"></i> Cerrar sesión
+      </button>
+    </form>
   </nav>
 
-  {{-- Info de usuario (Pie del Sidebar) --}}
+  {{-- Info de usuario --}}
   <div class="px-4 py-4 border-t border-brand-800/50 bg-brand-950/30">
     <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-brand-700 flex items-center justify-center
-                  text-white font-heading font-bold text-sm border border-brand-500">
+      <div class="w-8 h-8 rounded-full bg-brand-700 flex items-center justify-center text-white font-bold text-sm border border-brand-500">
         {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
       </div>
       <div class="overflow-hidden">
-        <p class="text-xs font-bold text-white truncate">{{ auth()->user()->name  ?? 'Administrador' }}</p>
-        <p class="text-[10px] text-brand-400 truncate">{{ auth()->user()->email ?? 'admin@municipio.gob' }}</p>
+        <p class="text-sm font-bold text-white truncate">{{ trim((auth()->user()->name ?? 'Administrador') . ' ' . (auth()->user()->lastname ?? '')) }}</p>
+        <p class="text-xs text-brand-400 truncate">{{ auth()->user()->email ?? 'admin@municipio.gob' }}</p>
       </div>
     </div>
   </div>
 </aside>
 
 {{-- WRAPPER PRINCIPAL --}}
-  <div class="flex flex-col flex-1 md:ml-64">
-
-  {{-- HEADER --}}
-  <header class="sticky top-0 z-10 bg-brand-850 backdrop-blur border-b border-gray-200 shadow-sm">
-    <div class="flex items-center justify-between px-4 h-14">
-
-      {{-- Izquierda: hamburguesa --}}
-      <div class="flex items-center gap-3 z-10">
-        <button id="hamburger-btn"
-                aria-label="Abrir menú"
-                class="md:hidden p-2 rounded-md text-white hover:text-slate-900 hover:bg-gray-100 transition-colors">
-          {{-- Ícono Phosphor: Abrir Menú (Se mantienen los IDs para tu JavaScript) --}}
+<div class="flex flex-col flex-1 md:ml-64 bg-gray-50 min-h-screen">
+  {{-- 
+    IMPORTANTE: No dejes espacios ni comentarios entre el DIV de arriba y el HEADER.
+    El -mt-px es el "seguro de vida" contra la línea blanca.
+  --}}
+  <header class="sticky top-0 z-40 bg-brand-850 border-b border-brand-900/50 shadow-sm -mt-px">
+    <div class="flex items-center justify-between px-4 h-14 relative">
+      
+      {{-- Izquierda: Hamburguesa --}}
+      <div class="flex items-center z-10">
+        <button id="hamburger-btn" class="md:hidden p-2 rounded-md text-white hover:bg-brand-800 transition-colors">
           <i id="icon-open" class="ph ph-list text-xl"></i>
-          
-          {{-- Ícono Phosphor: Cerrar Menú --}}
           <i id="icon-close" class="ph ph-x text-xl hidden"></i>
         </button>
       </div>
 
-      {{-- Centro: Título absoluto para alineación perfecta --}}
-      <div class="absolute inset-x-0 top-0 h-14 flex items-center justify-center pointer-events-none">
-          <span class="text-sm font-semibold text-white tracking-widest uppercase">
+      {{-- Centro: Título (Capa superior absoluta) --}}
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span class="text-md font-bold text-brand-100 tracking-[0.2em] uppercase text-center px-10">
             Limpieza Pública Municipal De Mataranch
           </span>
       </div>
-
     </div>
   </header>
 
-{{-- CONTENIDO INYECTADO DINÁMICAMENTE --}}
-    <main class="flex-1 px-4 sm:px-6 py-6">
-      @yield('content')
-    </main>
-    
-    {{-- Inclusión del Footer --}}
-    @include('partials.footer')
+  {{-- CONTENIDO --}}
+  <main class="flex-1 px-4 sm:px-6 py-6">
+    @yield('content')
+  </main>
+  
+  @include('partials.footer')
+</div>
 
-  </div>
-
-  {{-- JS COMPARTIDO --}}
-  <script src="{{ asset('js/sidebar.js') }}"></script>
-  @stack('scripts')
+<script src="{{ asset('js/sidebar.js') }}"></script>
+@stack('scripts')
 
 </body>
 </html>
