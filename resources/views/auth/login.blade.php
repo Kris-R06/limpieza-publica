@@ -96,7 +96,7 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label for="lastname" class="block text-sm font-medium text-gray-700">Apellido Paterno</label>
+                            <label for="lastname" class="block text-sm font-medium text-gray-700">Apellidos</label>
                             <input type="text" id="lastname" name="lastname" required 
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
                         </div>
