@@ -1,41 +1,29 @@
 /**
  * sidebar.js
- * Lógica compartida: sidebar móvil + fecha en el header.
+ * Lógica para el sidebar móvil.
  * Ruta: public/js/sidebar.js
  */
 
-// Esperamos a que todo el HTML esté cargado antes de ejecutar el script
 document.addEventListener('DOMContentLoaded', () => {
-
-    /* ── Fecha dinámica en el header ── */
-    const dateEl = document.getElementById('header-date');
-    if (dateEl) {
-        dateEl.textContent = new Date().toLocaleDateString('es-MX', {
-            weekday: 'long',
-            year:    'numeric',
-            month:   'long',
-            day:     'numeric',
-        });
-    }
 
     /* ── Sidebar toggle (solo en móvil) ── */
     const sidebar      = document.getElementById('sidebar');
     const overlay      = document.getElementById('sidebar-overlay');
     const iconOpen     = document.getElementById('icon-open');
     const iconClose    = document.getElementById('icon-close');
-    const hamburgerBtn = document.getElementById('hamburger-btn'); // Buscamos el botón
+    const hamburgerBtn = document.getElementById('hamburger-btn');
 
     let sidebarOpen = false;
 
     // Verificamos que los elementos existan en la página actual para evitar errores
     if (hamburgerBtn && sidebar && overlay) {
         
-        // Asignamos el evento clic al botón
+        // Asignamos el evento clic al botón de hamburguesa
         hamburgerBtn.addEventListener('click', () => {
             sidebarOpen ? closeSidebar() : openSidebar();
         });
 
-        // Asignamos el evento clic al fondo oscuro para cerrar
+        // Asignamos el evento clic al fondo oscuro para cerrar el menú
         overlay.addEventListener('click', closeSidebar);
     }
 
@@ -47,8 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Pequeño delay para que la transición de opacidad se dispare
         setTimeout(() => overlay.classList.remove('opacity-0'), 10);
         
-        iconOpen.classList.add('hidden');
-        iconClose.classList.remove('hidden');
+        if (iconOpen && iconClose) {
+            iconOpen.classList.add('hidden');
+            iconClose.classList.remove('hidden');
+        }
     }
 
     function closeSidebar() {
@@ -56,9 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.add('-translate-x-full');
         overlay.classList.add('opacity-0');
         
+        // Espera a que termine la animación de CSS antes de ocultarlo con 'hidden'
         setTimeout(() => overlay.classList.add('hidden'), 300);
         
-        iconOpen.classList.remove('hidden');
-        iconClose.classList.add('hidden');
+        if (iconOpen && iconClose) {
+            iconOpen.classList.remove('hidden');
+            iconClose.classList.add('hidden');
+        }
     }
 });
