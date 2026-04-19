@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RutaController;
+use App\Http\Controllers\ColoniaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,4 +25,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/rutas/{id}/edit', [RutaController::class, 'edit'])->name('rutas.edit');
     Route::put('/rutas/{id}', [RutaController::class, 'update'])->name('rutas.update');
     Route::delete('/rutas/{id}', [RutaController::class, 'destroy'])->name('rutas.destroy');
+
+    #Rutas para la gestión de colonias
+    Route::get('/colonias', [ColoniaController::class, 'index'])->name('colonias.index');
+    Route::get('/colonias/create', [ColoniaController::class, 'create'])->name('colonias.create');
+    Route::post('/colonias', [ColoniaController::class, 'store'])->name('colonias.store');
+    Route::get('/colonias/{id}/edit', [ColoniaController::class, 'edit'])->name('colonias.edit');
+    Route::put('/colonias/{id}', [ColoniaController::class, 'update'])->name('colonias.update');
+    Route::delete('/colonias/{id}', [ColoniaController::class, 'destroy'])->name('colonias.destroy');
 });
