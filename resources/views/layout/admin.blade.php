@@ -75,6 +75,14 @@
 		])>
 		<i class="ph ph-file-text text-xl"></i> Formulario
 		</a>
+    <a href="{{ route('users.index') }}" 
+		@class([
+			'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
+			'bg-brand-800 border-l-brand-400 text-white shadow-inner' => request()->routeIs('users.*'),
+			'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('users.*'),
+		])>
+		<i class="ph ph-users text-xl"></i> Usuarios
+		</a>
 		<a href="{{ route('rutas.index') }}" 
 		@class([
 			'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
@@ -83,6 +91,31 @@
 		])>
 		<i class="ph ph-chart-bar text-xl"></i> Rutas
 		</a>
+    <a href="{{ route('turnos.index') }}"
+    @class([
+      'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
+      'bg-brand-800 border-l-brand-400 text-white shadow-inner' => request()->routeIs('turnos.*'),
+      'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('turnos.*'),
+    ])>
+    <i class="ph ph-clock-user text-xl"></i> Turnos
+    </a>
+    <a href="{{ route('tipo_unidades.index') }}"
+		@class([
+			'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
+			'bg-brand-800 border-l-brand-400 text-white shadow-inner' => request()->routeIs('tipo_unidades.*'),
+			'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('tipo_unidades.*'),
+		])>
+		<i class="ph ph-truck text-xl"></i> Tipos de Unidades
+		</a>
+    <a href="{{ route('tipo_trabajadores.index') }}"
+    @class([
+      'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]',
+      'bg-brand-800 border-l-brand-400 text-white shadow-inner' => request()->routeIs('tipo_trabajadores.*'),
+      'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('tipo_trabajadores.*'),
+    ])>
+    <i class="ph ph-hard-hat text-xl"></i> Tipos de Trabajadores
+    </a>
+    
 
 		{{-- Separador Visual --}}
 		<div class="my-4 border-t border-brand-800/50"></div>
