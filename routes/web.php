@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RutaController;
-<<<<<<< Updated upstream
-=======
 use App\Http\Controllers\ColoniaController;
 use App\Http\Controllers\TipoUnidadController;
 use App\Http\Controllers\TipoTrabajadorController;
@@ -13,7 +11,7 @@ use App\Http\Controllers\TurnoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\TrabajadorController;
->>>>>>> Stashed changes
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,16 +24,21 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index']) ->name('home');
     Route::post('/logout', [AuthController::class, 'logout']) ->name('logout');
-});
 
+    #Rutas para la gestión de usuarios
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    #Rutas para la gestión de rutas
     Route::get('/rutas', [RutaController::class, 'index'])->name('rutas.index');
     Route::get('/rutas/create', [RutaController::class, 'create'])->name('rutas.create');
     Route::post('/rutas', [RutaController::class, 'store'])->name('rutas.store');
     Route::get('/rutas/{id}/edit', [RutaController::class, 'edit'])->name('rutas.edit');
     Route::put('/rutas/{id}', [RutaController::class, 'update'])->name('rutas.update');
-<<<<<<< Updated upstream
-    Route::delete('/rutas/{id}', [RutaController::class, 'destroy'])->name('rutas.destroy');
-=======
     Route::delete('/rutas/{id}', [RutaController::class, 'destroy'])->name('rutas.destroy');
 
     #Rutas para la gestión de colonias
@@ -86,4 +89,3 @@ Route::middleware('auth')->group(function () {
     Route::delete('/trabajadores/{id}', [TrabajadorController::class, 'destroy'])->name('trabajadores.destroy');
 
 });
->>>>>>> Stashed changes

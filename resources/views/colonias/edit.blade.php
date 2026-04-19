@@ -10,12 +10,12 @@
                 <i class="ph ph-pencil-line text-2xl"></i>
             </div>
             <div>
-                <h2 class="font-heading text-2xl font-bold text-slate-800 uppercase">Actualizar Ruta: {{ $ruta->numero }}</h2>
+                <h2 class="font-heading text-2xl font-bold text-slate-800 uppercase">Actualizar Colonia: {{ $colonia->nombre }}</h2>
             </div>
         </div>
 
         {{-- Cuerpo del Formulario --}}
-        <form action="{{ route('rutas.update', $ruta->id) }}" method="POST" class="p-8 space-y-6">
+        <form action="{{ route('colonias.update', $colonia->id) }}" method="POST" class="p-8 space-y-6">
             @csrf
             @method('PUT')
             <div class="space-y-2">
@@ -27,13 +27,41 @@
                         <i class="ph ph-hash-straight text-lg"></i>
                     </div>
                     <input type="text" 
-                           name="numero" 
-                           id="numero" 
-                           value="{{ old('numero', $ruta->numero) }}" {{-- Carga el valor actual o lo que el usuario escribió si hubo error --}}
+                           name="nombre" 
+                           id="nombre" 
+                           value="{{ old('nombre', $colonia->nombre) }}"
                            class="block w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-slate-700 font-medium focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all outline-none"
                            required>
                 </div>
-                @error('numero')
+                @error('nombre')
+                    <p class="text-red-500 text-sm mt-1 font-medium italic leading-relaxed">{{ $message }}</p>
+                @enderror
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-brand-500 transition-colors">
+                        <i class="ph ph-hash-straight text-lg"></i>
+                    </div>
+                    <input type="text" 
+                           name="habitantes" 
+                           id="habitantes" 
+                           value="{{ old('habitantes', $colonia->habitantes) }}"
+                           class="block w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-slate-700 font-medium focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all outline-none"
+                           required>
+                </div>
+                @error('habitantes')
+                    <p class="text-red-500 text-sm mt-1 font-medium italic leading-relaxed">{{ $message }}</p>
+                @enderror
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-brand-500 transition-colors">
+                        <i class="ph ph-hash-straight text-lg"></i>
+                    </div>
+                    <select name="id_ruta" id="id_ruta" class="block w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-slate-700 font-medium focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all outline-none" required>
+                        <option value="">Seleccionar Ruta</option>
+                        @foreach($rutas as $ruta)
+                            <option value="{{ $ruta->id }}">{{ $ruta->numero }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                @error('id_ruta')
                     <p class="text-red-500 text-sm mt-1 font-medium italic leading-relaxed">{{ $message }}</p>
                 @enderror
             </div>
@@ -47,7 +75,7 @@
                 <button type="submit" 
                         class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-8 rounded-xl shadow-lg shadow-blue-600/20 transition-all uppercase text-xs tracking-widest">
                     <i class="ph ph-arrow-clockwise text-lg"></i>
-                    Actualizar Ruta
+                    Actualizar Colonia
                 </button>
             </div>
         </form>
