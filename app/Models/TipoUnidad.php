@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tipo_Unidad extends Model
+class TipoUnidad extends Model
 {
-    protected $table_name = "tipo_unidades";
+    protected $table = "tipo_unidades";
 }
