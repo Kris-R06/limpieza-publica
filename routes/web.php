@@ -9,6 +9,9 @@ use App\Http\Controllers\TipoUnidadController;
 use App\Http\Controllers\TipoTrabajadorController;
 use App\Http\Controllers\TurnoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UnidadController;
+use App\Http\Controllers\TrabajadorController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -68,4 +71,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/tipo_trabajadores/{id}/edit', [TipoTrabajadorController::class, 'edit'])->name('tipo_trabajadores.edit');
     Route::put('/tipo_trabajadores/{id}', [TipoTrabajadorController::class, 'update'])->name('tipo_trabajadores.update');
     Route::delete('/tipo_trabajadores/{id}', [TipoTrabajadorController::class, 'destroy'])->name('tipo_trabajadores.destroy');
+
+    #Rutas para la gestión de unidades
+    Route::get('/unidades', [UnidadController::class, 'index'])->name('unidades.index');
+    Route::get('/unidades/create', [UnidadController::class, 'create'])->name('unidades.create');
+    Route::post('/unidades', [UnidadController::class, 'store'])->name('unidades.store');
+    Route::get('/unidades/{id}/edit', [UnidadController::class, 'edit'])->name('unidades.edit');
+    Route::put('/unidades/{id}', [UnidadController::class, 'update'])->name('unidades.update');
+    Route::delete('/unidades/{id}', [UnidadController::class, 'destroy'])->name('unidades.destroy');
+
+    #Rutas para la gestión de trabajadores
+    Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores.index');
+    Route::get('/trabajadores/create', [TrabajadorController::class, 'create'])->name('trabajadores.create');
+    Route::post('/trabajadores', [TrabajadorController::class, 'store'])->name('trabajadores.store');
+    Route::get('/trabajadores/{id}/edit', [TrabajadorController::class, 'edit'])->name('trabajadores.edit');
+    Route::put('/trabajadores/{id}', [TrabajadorController::class, 'update'])->name('trabajadores.update');
+    Route::delete('/trabajadores/{id}', [TrabajadorController::class, 'destroy'])->name('trabajadores.destroy');
+
 });
