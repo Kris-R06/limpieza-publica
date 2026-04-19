@@ -29,7 +29,7 @@
                     <input type="text" 
                            name="nombre" 
                            id="nombre" 
-                           placeholder="Ej. Chofer de Camión de Limpieza o Operador de Recolección"
+                           placeholder="Ej. Chofer o Despachador"
                            class="block w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-slate-700 font-medium focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all outline-none"
                            required>
                 </div>
@@ -52,14 +52,5 @@
             </div>
         </form>
     </div>
-
-    {{-- TIP PARA EL USUARIO --}}
-    <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
-        <i class="ph ph-info text-blue-500 text-xl mt-0.5"></i>
-        <p class="text-xs text-blue-700 leading-relaxed">
-            <strong>Dato de interés:</strong> Asegúrate de que el nombre del tipo de trabajador no esté duplicado. El sistema de Mataranch organiza los tipos de trabajadores de forma alfanumérica para facilitar el monitoreo de los camiones.
-        </p>
-    </div>
-
 </div>
 @endsection

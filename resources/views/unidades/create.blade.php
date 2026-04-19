@@ -91,10 +91,10 @@
     </div>
 
     {{-- TIP PARA EL USUARIO --}}
-    <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
-        <i class="ph ph-info text-blue-500 text-xl mt-0.5"></i>
+    <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex items-center gap-3">
+        <i class="ph ph-info text-blue-500 text-xl"></i>
         <p class="text-xs text-blue-700 leading-relaxed">
-            <strong>Dato de interés:</strong> Asegúrate de que el número de unidad no esté duplicado. El sistema de Mataranch organiza las unidades de forma alfanumérica para facilitar el monitoreo de los camiones.
+            <strong>Dato de interés:</strong> Asegúrate de que el número de unidad no esté duplicado.
         </p>
     </div>
 

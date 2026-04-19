@@ -29,7 +29,7 @@
                     <input type="text" 
                            name="horario" 
                            id="horario" 
-                           placeholder="Ej. Turno Matutino o Turno Vespertino"
+                           placeholder="Ej. 8:00 - 12:00"
                            class="block w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-slate-700 font-medium focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all outline-none"
                            required>
                 </div>
@@ -54,10 +54,10 @@
     </div>
 
     {{-- TIP PARA EL USUARIO --}}
-    <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
-        <i class="ph ph-info text-blue-500 text-xl mt-0.5"></i>
+    <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex items-center gap-3">
+        <i class="ph ph-info text-blue-500 text-xl"></i>
         <p class="text-xs text-blue-700 leading-relaxed">
-            <strong>Dato de interés:</strong> Asegúrate de que el turno no esté duplicado. El sistema de Mataranch organiza los turnos para facilitar el monitoreo de los camiones.
+            <strong>Dato de interés:</strong> Asegúrate de que el horario del turno esté en un formato de 24 horas.
         </p>
     </div>
 

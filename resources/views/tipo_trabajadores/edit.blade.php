@@ -57,7 +57,7 @@
     <div class="bg-amber-50/50 border border-amber-100 rounded-xl p-4 flex items-center gap-3">
         <i class="ph ph-warning-diamond text-amber-500 text-xl"></i>
         <p class="text-md text-amber-700 leading-relaxed text-center">
-            <strong>Atención:</strong> Al cambiar el identificador del tipo de trabajador, todos los registros históricos asociados a este ID se actualizarán.
+            <strong>Atención:</strong> Al cambiar el nombre del tipo de trabajador, todos los registros históricos asociados a este ID se actualizarán.
         </p>
     </div>
 

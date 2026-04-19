@@ -109,14 +109,5 @@
             </div>
         </form>
     </div>
-
-    {{-- TIP PARA EL USUARIO --}}
-    <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
-        <i class="ph ph-info text-blue-500 text-xl mt-0.5"></i>
-        <p class="text-xs text-blue-700 leading-relaxed">
-            <strong>Dato de interés:</strong> Asegúrate de que el nombre de usuario no esté duplicado. El sistema de Mataranch organiza los usuarios de forma alfabética para facilitar el monitoreo de los camiones.
-        </p>
-    </div>
-
 </div>
 @endsection

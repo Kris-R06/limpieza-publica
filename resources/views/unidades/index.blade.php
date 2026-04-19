@@ -89,7 +89,7 @@
         </div>
 
         {{-- PAGINACIÓN (Opcional, si usas ->paginate() en el controlador) --}}
-        @if(method_exists($unidades, 'links'))
+        @if(method_exists($unidades, 'links') && $unidades->hasPages())
         <div class="px-6 py-4 bg-gray-50/30 border-t border-gray-100">
             {{ $unidades->links() }}
         </div>
