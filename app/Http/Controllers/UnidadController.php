@@ -11,7 +11,7 @@ class UnidadController extends Controller
     //
     public function index()
     {
-        $unidades = Unidad::with('tipoUnidad')->paginate(10);
+        $unidades = Unidad::with('tipoUnidad')->paginate(5);
         return view('unidades.index', compact('unidades'));
     }
 

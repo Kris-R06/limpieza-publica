@@ -44,13 +44,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 
-                {{-- Logo SISLIP --}}
                 <div class="shrink-0 flex items-center gap-3">
                     <div class="w-9 h-9 rounded-lg bg-brand-100 flex items-center justify-center">
                         <i class="ph ph-trash text-xl text-brand-850"></i>
                     </div>
                     <div>
-                        <p class="font-heading text-xl font-bold text-white tracking-wide leading-tight uppercase">Sistema de Limpieza Pública</p>
+                        <p class="font-heading text-xl font-bold text-white tracking-wide leading-tight uppercase">Sudo-Trash</p>
                     </div>
                 </div>
 
@@ -111,9 +110,10 @@
                     <h1 class="font-heading text-5xl sm:text-7xl font-extrabold text-slate-900 leading-[0.95] tracking-tight uppercase">
                         Ciudad limpia, <br>
                         <span class="text-brand-600">Gestión Inteligente</span>
+                        <span class="text-brand-600">Con Sudo-Trash.</span>
                     </h1>
                     <p class="text-lg text-slate-500 max-w-lg leading-relaxed">
-                        Optimiza la recolección de residuos, monitorea rutas en tiempo real y gestiona tus cuadrillas con el sistema centralizado SISLIP.
+                        Registra formularios para monitorear las actividades diarias de las unidades de limpieza, asegurando un control eficiente y una ciudad más limpia para todos.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                         <a href="{{ route('login') }}" class="bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-10 rounded-xl shadow-xl shadow-brand-600/30 transition-all text-center uppercase tracking-widest">
@@ -150,7 +150,7 @@
                         </div>
                         <h3 class="font-heading text-2xl font-bold text-slate-900 mb-4 uppercase">Registros</h3>
                         <p class="text-slate-500 text-sm leading-relaxed tracking-wide">
-                            Control detallado de actividades diarias, pesajes y reportes de cumplimiento por ruta.
+                            Control detallado de actividades diarias, recolección y reportes de cumplimiento por ruta.
                         </p>
                     </div>
 
@@ -161,7 +161,7 @@
                         </div>
                         <h3 class="font-heading text-2xl font-bold text-slate-900 mb-4 uppercase">Monitoreo</h3>
                         <p class="text-slate-500 text-sm leading-relaxed tracking-wide">
-                            Visualización de zonas atendidas y optimización de trayectos para ahorro de recursos.
+                            Visualización de colonias atendidas y rutas activas.
                         </p>
                     </div>
 
@@ -172,7 +172,7 @@
                         </div>
                         <h3 class="font-heading text-2xl font-bold text-slate-900 mb-4 uppercase">Unidades</h3>
                         <p class="text-slate-500 text-sm leading-relaxed tracking-wide">
-                            Gestión de flota vehicular, mantenimientos preventivos y asignación de choferes.
+                            Monitoreo de las unidades activas en el sistema.
                         </p>
                     </div>
 
@@ -188,11 +188,11 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="flex items-center gap-3">
                     <i class="ph ph-trash text-2xl text-brand-100"></i>
-                    <span class="font-heading text-xl font-bold text-white uppercase tracking-widest">Sistema de Limpieza Pública</span>
+                    <span class="font-heading text-xl font-bold text-white uppercase tracking-widest">Sudo-Trash</span>
                 </div>
                 
                 <p class="text-sm text-white font-medium">
-                    &copy; {{ date('Y') }} Dirección de Servicios Públicos. <span class="hidden sm:inline">|</span> Matamoros, Tamps.
+                    &copy; {{ date('Y') }} Sistema de Limpieza Sudo-Trash. <span class="hidden sm:inline">|</span> Matamoros, Tamps.
                 </p>
             </div>
         </div>

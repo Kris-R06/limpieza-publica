@@ -40,7 +40,7 @@
             <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
                 <div class="md:col-span-2 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Fecha de Orden <span class="text-red-500">*</span></label>
-                    <input type="date" name="fecha_orden" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
+                    <input type="date" name="fecha_orden" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
                 </div>
                 <div class="md:col-span-2 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Fecha de Captura</label>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="md:col-span-2 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Turno <span class="text-red-500">*</span></label>
-                    <select name="id_turno" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
+                    <select name="id_turno" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
                         <option value="" disabled selected>Seleccionar...</option>
                         @foreach($turnos as $turno) <option value="{{ $turno->id }}">{{ $turno->horario }}</option> @endforeach
                     </select>
@@ -58,21 +58,21 @@
                 {{-- FILA 2: PERSONAL (3 campos iguales) --}}
                 <div class="md:col-span-2 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Ruta Operativa <span class="text-red-500">*</span></label>
-                    <select id="ruta_selector" name="id_ruta" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
+                    <select id="ruta_selector" name="id_ruta" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
                         <option value="" disabled selected>Elegir Ruta...</option>
                         @foreach($rutas as $ruta) <option value="{{ $ruta->id }}">{{ $ruta->numero }}</option> @endforeach
                     </select>
                 </div>
                 <div class="md:col-span-2 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Despachador <span class="text-red-500">*</span></label>
-                    <select name="id_despachador" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
+                    <select name="id_despachador" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
                         <option value="" disabled selected>Seleccionar...</option>
                         @foreach($despachadores as $d) <option value="{{ $d->id }}">{{ $d->nombre }}</option> @endforeach
                     </select>
                 </div>
                 <div class="md:col-span-2 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Chofer <span class="text-red-500">*</span></label>
-                    <select name="id_chofer" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
+                    <select name="id_chofer" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
                         <option value="" disabled selected>Seleccionar...</option>
                         @foreach($choferes as $c) <option value="{{ $c->id }}">{{ $c->nombre }}</option> @endforeach
                     </select>
@@ -81,14 +81,14 @@
                 {{-- FILA 3: UNIDADES (50/50 -> 1.5 + 1.5) --}}
                 <div class="md:col-span-3 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Tipo de Unidad <span class="text-red-500">*</span></label>
-                    <select id="tipo_unidad_selector" name="id_tipo_unidad" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
+                    <select id="tipo_unidad_selector" name="id_tipo_unidad" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none cursor-pointer">
                         <option value="" disabled selected>Seleccionar tipo...</option>
                         @foreach($tipos_unidades as $tipo) <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option> @endforeach
                     </select>
                 </div>
                 <div class="md:col-span-3 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Unidad <span class="text-red-500">*</span></label>
-                    <select id="unidad_selector" name="id_unidad" disabled class="w-full px-4 py-2.5 bg-gray-100 border border-gray-200 rounded-xl text-sm outline-none cursor-not-allowed">
+                    <select id="unidad_selector" name="id_unidad" required disabled class="w-full px-4 py-2.5 bg-gray-100 border border-gray-200 rounded-xl text-sm outline-none cursor-not-allowed">
                         <option value="" disabled selected>Primero elige un tipo...</option>
                     </select>
                 </div>
@@ -97,29 +97,29 @@
                 <div class="md:col-span-3 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Kg Recolectados</label>
                     <div class="relative">
-                        <input type="number" name="kg_recolectados" placeholder="0.00 kg" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500/20 outline-none">
+                        <input type="number" name="kg_recolectados" required placeholder="0.00 kg" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500/20 outline-none">
                     </div>
                 </div>
                 <div class="md:col-span-3 space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Puches Realizados</label>
-                    <input type="number" name="puches" placeholder="Cantidad de puches" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
+                    <input type="number" name="puches" required placeholder="Cantidad de puches" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
                 </div>
 
                 {{-- FILA 5: ESTADÍSTICA BLOQUEADA (3 campos iguales) --}}
                 <div class="md:col-span-2 space-y-1">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Año</label>
-                    <input type="number" name="anio" value="{{ now()->format('Y') }}" readonly 
+                    <input type="number" name="anio" value="{{ now()->format('Y') }}" readonly required
                         class="w-full px-4 py-2.5 bg-gray-100 border border-gray-200 rounded-xl text-slate-500 text-sm cursor-not-allowed outline-none">
                 </div>
                 <div class="md:col-span-2 space-y-1">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Mes</label>
                     {{-- Usamos un input texto en lugar de select para que el readonly sea real --}}
-                    <input type="text" name="mes" value="{{ now()->translatedFormat('F') }}" readonly 
+                    <input type="text" name="mes" value="{{ now()->translatedFormat('F') }}" readonly required
                         class="w-full px-4 py-2.5 bg-gray-100 border border-gray-200 rounded-xl text-slate-500 text-sm cursor-not-allowed outline-none capitalize">
                 </div>
                 <div class="md:col-span-2 space-y-1">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Día</label>
-                    <input type="number" name="dia" value="{{ now()->format('d') }}" readonly 
+                    <input type="number" name="dia" value="{{ now()->format('d') }}" readonly required
                         class="w-full px-4 py-2.5 bg-gray-100 border border-gray-200 rounded-xl text-slate-500 text-sm cursor-not-allowed outline-none">
                 </div>
             </div>
@@ -138,19 +138,19 @@
                 <div class="space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Suma de %</label>
                     {{-- ID agregado: calc_suma --}}
-                    <input type="text" id="calc_suma" name="suma_porcentajes" value="0" readonly 
+                    <input type="text" id="calc_suma" name="suma_porcentajes" value="0" readonly required
                         class="w-full px-4 py-2.5 bg-gray-100 border border-gray-200 rounded-xl text-slate-500 font-bold text-sm cursor-not-allowed outline-none">
                 </div>
                 <div class="space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Cantidad de Colonias</label>
                     {{-- ID agregado: calc_cantidad --}}
-                    <input type="text" id="calc_cantidad" name="cantidad_colonias" value="0" readonly 
+                    <input type="text" id="calc_cantidad" name="cantidad_colonias" value="0" readonly required
                         class="w-full px-4 py-2.5 bg-gray-100 border border-gray-200 rounded-xl text-slate-500 font-bold text-sm cursor-not-allowed outline-none">
                 </div>
                 <div class="space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">% de Cobertura Total</label>
                     {{-- ID agregado: calc_cobertura --}}
-                    <input type="text" id="calc_cobertura" name="cobertura_total" value="0%" readonly 
+                    <input type="text" id="calc_cobertura" name="cobertura_total" value="0%" readonly required
                         class="w-full px-4 py-2.5 bg-brand-50 border border-brand-200 rounded-xl text-brand-700 font-black text-sm cursor-not-allowed outline-none">
                 </div>
             </div>
@@ -204,17 +204,17 @@
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Km al Salir</label>
                         <input type="number" id="km_salir" name="km_salir" placeholder="0" min="0"
-                               class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
+                               required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
                     </div>
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Km al Regresar</label>
                         <input type="number" id="km_regresar" name="km_regresar" placeholder="0" min="0"
-                               class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
+                               required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
                     </div>
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Km Recorridos</label>
                         <input type="text" id="km_recorridos" name="km_recorridos" value="0" readonly
-                               class="w-full px-4 py-2.5 bg-brand-50 border border-brand-200 rounded-xl text-brand-700 font-black text-sm cursor-not-allowed outline-none">
+                               readonly required class="w-full px-4 py-2.5 bg-brand-50 border border-brand-200 rounded-xl text-brand-700 font-black text-sm cursor-not-allowed outline-none">
                     </div>
                 </div>
             </div>
@@ -228,23 +228,23 @@
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Diésel Inicial (L)</label>
                         <input type="number" id="diesel_inicial" name="diesel_inicial" placeholder="0.0" step="0.1" min="0"
-                               class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
+                               required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
                     </div>
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Diésel Cargado (L)</label>
                         <input type="number" id="diesel_cargado" name="diesel_cargado" placeholder="0.0" step="0.1" min="0"
-                               class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
+                               required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
                     </div>
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Diésel Final (L)</label>
                         <input type="number" id="diesel_final" name="diesel_final" placeholder="0.0" step="0.1" min="0"
-                               class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
+                               required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20">
                     </div>
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Diésel Consumido</label>
                         <div class="relative">
                             <input type="text" id="diesel_consumido" name="diesel_consumido" value="0.0" readonly
-                                   class="w-full px-4 py-2.5 bg-brand-50 border border-brand-200 rounded-xl text-brand-700 font-black text-sm cursor-not-allowed outline-none">
+                                   readonly required class="w-full px-4 py-2.5 bg-brand-50 border border-brand-200 rounded-xl text-brand-700 font-black text-sm cursor-not-allowed outline-none">
                             <span class="absolute inset-y-0 right-4 flex items-center text-brand-600 font-bold text-xs">Lts</span>
                         </div>
                     </div>
@@ -262,7 +262,7 @@
         </div>
         <div class="p-6">
             <textarea name="comentarios" rows="4" 
-                      placeholder="Escribe aquí cualquier observación relevante sobre la ruta, el personal o la unidad..."
+                      required placeholder="Escribe aquí cualquier observación relevante sobre la ruta, el personal o la unidad..."
                       class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-500/20 transition-all resize-none"></textarea>
         </div>
     </div>
