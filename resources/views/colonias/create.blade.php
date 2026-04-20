@@ -37,6 +37,9 @@
                 @error('nombre')
                     <p class="text-red-500 text-sm mt-1 font-medium italic leading-relaxed">{{ $message }}</p>
                 @enderror
+                <label for="habitantes" class="block text-xs font-bold text-slate-500 uppercase tracking-widest">
+                    Número de Habitantes
+                </label>
                 <div class="relative group">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-brand-500 transition-colors">
                         <i class="ph ph-hash-straight text-lg"></i>
@@ -51,6 +54,9 @@
                 @error('habitantes')
                     <p class="text-red-500 text-sm mt-1 font-medium italic leading-relaxed">{{ $message }}</p>
                 @enderror
+                <label for="id_ruta" class="block text-xs font-bold text-slate-500 uppercase tracking-widest">
+                    Ruta Asignada
+                </label>
                 <div class="relative group">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-brand-500 transition-colors">
                         <i class="ph ph-hash-straight text-lg"></i>
@@ -81,14 +87,5 @@
             </div>
         </form>
     </div>
-
-    {{-- TIP PARA EL USUARIO --}}
-    <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
-        <i class="ph ph-info text-blue-500 text-xl mt-0.5"></i>
-        <p class="text-xs text-blue-700 leading-relaxed">
-            <strong>Dato de interés:</strong> Asegúrate de que el número de ruta no esté duplicado. El sistema de Mataranch organiza las rutas de forma alfanumérica para facilitar el monitoreo de los camiones.
-        </p>
-    </div>
-
 </div>
 @endsection

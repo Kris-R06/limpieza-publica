@@ -14,4 +14,8 @@ class Unidad extends Model
         return $this->belongsTo(TipoUnidad::class, 'tipo_unidad_id');
     }
 
+    public function tipo()
+    {
+        return $this->belongsTo(TipoUnidad::class, 'tipo_unidad_id');
+    }
 }

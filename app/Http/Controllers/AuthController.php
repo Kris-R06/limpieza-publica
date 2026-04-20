@@ -40,7 +40,7 @@ class AuthController extends Controller
         ]);
         if (auth()->attempt($credentials)){
             request()->session()->regenerate();
-            return redirect()->route('home');
+            return redirect()->route('formulario.index');
         }
         return back()->withErrors([
             'email'=>'Las credenciales no son correctas.',

@@ -62,7 +62,7 @@
                     </a>
                     @endguest
                     @auth
-                    <a href="{{ route('home') }}" class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-2 rounded-lg text-sm font-bold transition-all shadow-md shadow-brand-600/20 uppercase tracking-widest">
+                    <a href="{{ route('formulario.index') }}" class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-2 rounded-lg text-sm font-bold transition-all shadow-md shadow-brand-600/20 uppercase tracking-widest">
                         Dashboard
                     </a>
                     <form method="POST" action="{{ route('logout') }}" class="inline">

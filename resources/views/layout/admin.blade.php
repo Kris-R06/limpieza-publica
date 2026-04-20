@@ -72,20 +72,22 @@
     {{-- Navegación --}}
     <nav class="flex-1 px-3 py-5 space-y-1 overflow-y-auto">
       <p class="px-3 mb-3 text-md font-bold text-brand-400 tracking-[0.2em] uppercase">Menú Principal</p>
+      {{--
       <a href="{{ route('home') }}"
         @class([ 'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]' , 'bg-brand-800 border-l-brand-400 text-white shadow-inner'=> request()->routeIs('home'),
         'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('home'),
         ])>
         <i class="ph ph-house text-xl"></i> Inicio
       </a>
-      <a href="#"
+      --}}
+      <a href="{{ route('formulario.index') }}"
         @class([ 'flex items-center gap-3 px-3 py-2.5 rounded-md text-lg font-medium transition-all duration-150 border-l-[3px]' , 'bg-brand-800 border-l-brand-400 text-white shadow-inner'=> request()->routeIs('formulario.*'),
         'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('formulario.*'),
         ])>
         <i class="ph ph-file-text text-xl"></i> Formulario
       </a>
       @php
-      $adminMenuOpen = request()->routeIs('users.*') || request()->routeIs('turnos.*') || request()->routeIs('rutas.*');
+      $adminMenuOpen = request()->routeIs('users.*') || request()->routeIs('turnos.*') || request()->routeIs('rutas.*') || request()->routeIs('colonias.*') || request()->routeIs('folios.*');
       $unidadesMenuOpen = request()->routeIs('unidades.*') || request()->routeIs('tipo_unidades.*');
       $trabajadoresMenuOpen = request()->routeIs('trabajadores.*') || request()->routeIs('tipo_trabajadores.*');
       @endphp
@@ -118,6 +120,18 @@
           'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('rutas.*'),
           ])>
           <i class="ph ph-chart-bar text-lg"></i> Rutas
+        </a>
+        <a href="{{ route('colonias.index') }}"
+          @class([ 'flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-all duration-150 border-l-[3px]' , 'bg-brand-800 border-l-brand-400 text-white shadow-inner'=> request()->routeIs('colonias.*'),
+          'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('colonias.*'),
+          ])>
+          <i class="ph ph-list-numbers text-lg"></i> Colonias
+        </a>
+        <a href="{{ route('folios.index') }}"
+          @class([ 'flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-all duration-150 border-l-[3px]' , 'bg-brand-800 border-l-brand-400 text-white shadow-inner'=> request()->routeIs('folios.*'),
+          'border-l-transparent text-brand-100 hover:bg-brand-800/50 hover:text-white' => !request()->routeIs('folios.*'),
+          ])>
+          <i class="ph ph-ticket text-lg"></i> Folios
         </a>
       </div>
       <button type="button"

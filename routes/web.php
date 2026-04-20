@@ -11,6 +11,10 @@ use App\Http\Controllers\TurnoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\TrabajadorController;
+use App\Http\Controllers\FormularioController;
+use App\Http\Controllers\FolioController;
+use App\Models\Colonia;
+use App\Models\Unidad;
 
 
 Route::get('/', function () {
@@ -89,5 +93,31 @@ Route::middleware('auth')->group(function () {
     Route::get('/trabajadores/{id}/edit', [TrabajadorController::class, 'edit'])->name('trabajadores.edit');
     Route::put('/trabajadores/{id}', [TrabajadorController::class, 'update'])->name('trabajadores.update');
     Route::delete('/trabajadores/{id}', [TrabajadorController::class, 'destroy'])->name('trabajadores.destroy');
+
+    #Rutas para la gestión de formularios
+    Route::get('/formularios', [FormularioController::class, 'index'])->name('formulario.index');
+    Route::get('/formularios/create', [FormularioController::class, 'create'])->name('formulario.create');
+    Route::post('/formularios', [FormularioController::class, 'store'])->name('formulario.store');
+    Route::get('/formularios/{id}/edit', [FormularioController::class, 'edit'])->name('formulario.edit');
+    Route::put('/formularios/{id}', [FormularioController::class, 'update'])->name('formulario.update');
+    Route::delete('/formularios/{id}', [FormularioController::class, 'destroy'])->name('formulario.destroy');
+    Route::get('/formularios/{id}', [FormularioController::class, 'show'])->name('formulario.show');
+    
+    #Rutas para la gestión de folios
+    Route::get('/folios', [FolioController::class, 'index'])->name('folios.index');
+
+    #Rutas para APIs
+    Route::get('/api/rutas/{id}/colonias', function ($id) {
+    return response()->json(
+        Colonia::where('id_ruta', $id)->get(['id', 'nombre', 'habitantes'])
+    );
+    });
+
+    Route::get('/api/tipos-unidades/{id}/unidades', function ($id) {
+    return \App\Models\Unidad::where('tipo_unidad_id', $id)
+                ->orderBy('numero', 'asc')
+                ->get(['id', 'numero', 'nombre']);
+    });
+
 
 });

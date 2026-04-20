@@ -78,7 +78,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="px-6 py-12 text-center">
+                        <td colspan="5" class="px-6 py-12 text-center border-b-0">
                             <div class="flex flex-col items-center gap-3">
                                 <i class="ph ph-detective text-5xl text-slate-200"></i>
                                 <p class="text-slate-400 text-sm">No se encontraron colonias registradas.</p>
@@ -91,7 +91,7 @@
         </div>
 
         {{-- PAGINACIÓN (Opcional, si usas ->paginate() en el controlador) --}}
-        @if(method_exists($colonias, 'links'))
+        @if(method_exists($colonias, 'links') && $colonias->hasPages())
         <div class="px-6 py-4 bg-gray-50/30 border-t border-gray-100">
             {{ $colonias->links() }}
         </div>

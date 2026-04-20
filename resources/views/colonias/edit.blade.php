@@ -36,6 +36,9 @@
                 @error('nombre')
                     <p class="text-red-500 text-sm mt-1 font-medium italic leading-relaxed">{{ $message }}</p>
                 @enderror
+                <label for="habitantes" class="block text-xs font-bold text-slate-500 uppercase tracking-widest">
+                    Número de Habitantes
+                </label>
                 <div class="relative group">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-brand-500 transition-colors">
                         <i class="ph ph-hash-straight text-lg"></i>
@@ -50,6 +53,9 @@
                 @error('habitantes')
                     <p class="text-red-500 text-sm mt-1 font-medium italic leading-relaxed">{{ $message }}</p>
                 @enderror
+                <label for="id_ruta" class="block text-xs font-bold text-slate-500 uppercase tracking-widest">
+                    Ruta Asignada
+                </label>
                 <div class="relative group">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-brand-500 transition-colors">
                         <i class="ph ph-hash-straight text-lg"></i>
@@ -57,7 +63,8 @@
                     <select name="id_ruta" id="id_ruta" class="block w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-slate-700 font-medium focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all outline-none" required>
                         <option value="">Seleccionar Ruta</option>
                         @foreach($rutas as $ruta)
-                            <option value="{{ $ruta->id }}">{{ $ruta->numero }}</option>
+                            <option value="{{ $ruta->id }}" {{ old('id_ruta', $colonia->id_ruta) == $ruta->id ? 'selected' : '' }}>{{ $ruta->numero }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -68,7 +75,7 @@
 
             {{-- FOOTER DE ACCIONES --}}
             <div class="pt-6 border-t border-gray-100 flex items-center justify-end gap-4">
-                <a href="{{ route('rutas.index') }}" 
+                <a href="{{ route('colonias.index') }}" 
                    class="px-6 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-slate-600 hover:bg-gray-100 transition-all uppercase tracking-widest">
                     Cancelar
                 </a>

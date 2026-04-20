@@ -9,7 +9,7 @@ class RutaController extends Controller
 {
     public function index()
     {
-        $rutas = Ruta::all();
+        $rutas = Ruta::latest('id')->paginate(10);
         return view('rutas.index', compact('rutas'));
     }
 
