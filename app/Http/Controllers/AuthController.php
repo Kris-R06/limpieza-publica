@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -38,7 +39,7 @@ class AuthController extends Controller
             'email'=>'required|string|email',
             'password'=>'required|string',
         ]);
-        if (auth()->attempt($credentials)){
+        if (Auth::attempt($credentials)){
             request()->session()->regenerate();
             return redirect()->route('formulario.index');
         }
@@ -48,7 +49,7 @@ class AuthController extends Controller
     }
     
     public function logout(){
-        auth()->logout();
+        Auth::logout();
         return redirect('/');
     }
 }

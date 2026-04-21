@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nombre', 255);
             $table->unsignedInteger('habitantes');
             $table->unsignedBigInteger('id_ruta');
-            $table->foreign('id_ruta')->references('id')->on('rutas')->onDelete('cascade');
+            $table->foreign('id_ruta')->references('id')->on('rutas')->onDelete('restrict')->onUpdate('restrict');
         });
     }
 

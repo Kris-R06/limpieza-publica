@@ -71,9 +71,12 @@ class ColoniaController extends Controller
 
     public function destroy($id)
     {
-        $colonia = Colonia::findOrFail($id);
-        $colonia->delete();
-
-        return redirect()->route('colonias.index')->with('success', 'Colonia eliminada exitosamente.');
+        try {
+             $colonia = Colonia::findOrFail($id);
+             $colonia->delete();
+             return redirect()->route('colonias.index')->with('success', 'Colonia eliminada exitosamente.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('colonias.index')->with('error', 'No se puede eliminar la colonia porque está relacionada con otros registros.');
+        }
     }
 }

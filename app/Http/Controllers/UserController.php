@@ -69,10 +69,12 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente');
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('users.index')->with('error', 'No se puede eliminar el usuario porque está relacionado con otros registros.');
         }
+    }
 }
-

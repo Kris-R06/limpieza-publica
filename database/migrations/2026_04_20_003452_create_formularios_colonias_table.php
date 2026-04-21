@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('formularios_colonias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_formulario')->constrained('formularios');
-            $table->foreignId('id_colonia')->constrained('colonias');
+            $table->foreignId('id_formulario')->constrained('formularios')->onDelete('cascade')->onUpdate('restrict');
+            $table->foreignId('id_colonia')->constrained('colonias')->onDelete('cascade')->onUpdate('restrict');
             $table->decimal('porcentaje', 5, 2)->default(0);
             
             $table->timestamps();

@@ -78,9 +78,12 @@ class UnidadController extends Controller
 
     public function destroy($id)
     {
-        $unidad = Unidad::findOrFail($id);
-        $unidad->delete();
-
-        return redirect()->route('unidades.index')->with('success', 'Unidad eliminada exitosamente.');
+        try {
+            $unidad = Unidad::findOrFail($id);
+            $unidad->delete();
+            return redirect()->route('unidades.index')->with('success', 'Unidad eliminada exitosamente.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('unidades.index')->with('error', 'No se puede eliminar la unidad porque está relacionada con otros registros.');
+        }
     }
 }

@@ -58,9 +58,16 @@ class RutaController extends Controller
 
     public function destroy($id)
     {
-        $ruta = Ruta::findOrFail($id);
-        $ruta->delete();
+        try {
+            $ruta = Ruta::findOrFail($id);
+            $ruta->delete(); 
+            
+            return redirect()->back()->with('success', 'Ruta eliminada.');
 
-        return redirect()->route('rutas.index')->with('success', 'Ruta eliminada exitosamente.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors([
+                'error' => 'No puedes borrar esta Ruta porque tiene Colonias asignadas.'
+            ]);
+        }    
     }
 }

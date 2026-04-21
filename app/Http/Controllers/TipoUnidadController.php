@@ -60,10 +60,12 @@ class TipoUnidadController extends Controller
 
     public function destroy($id)
     {
-        // TipoUnidad::destroy($id);
-        $tipo_unidad = TipoUnidad::findOrFail($id);
-        $tipo_unidad->delete();
-
-        return redirect()->route('tipo_unidades.index')->with('success', 'Eliminado correctamente');
+        try {
+            $tipo_unidad = TipoUnidad::findOrFail($id);
+            $tipo_unidad->delete();
+            return redirect()->route('tipo_unidades.index')->with('success', 'Tipo de unidad eliminado correctamente');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('tipo_unidades.index')->with('error', 'No se puede eliminar el tipo de unidad porque está relacionado con otros registros.');
+        }
     }
 }

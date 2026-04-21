@@ -69,9 +69,12 @@ class TrabajadorController extends Controller
 
     public function destroy($id)
     {
-        $trabajador = Trabajador::findOrFail($id);
-        $trabajador->delete();
-
-        return redirect()->route('trabajadores.index')->with('success', 'Trabajador eliminado exitosamente.');
+        try {
+            $trabajador = Trabajador::findOrFail($id);
+            $trabajador->delete();
+            return redirect()->route('trabajadores.index')->with('success', 'Trabajador eliminado exitosamente.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('trabajadores.index')->with('error', 'No se puede eliminar el trabajador porque está relacionado con otros registros.');
+        }
     }
 }

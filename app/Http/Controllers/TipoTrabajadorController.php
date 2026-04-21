@@ -60,10 +60,12 @@ class TipoTrabajadorController extends Controller
 
     public function destroy($id)
     {
-        // TipoTrabajador::destroy($id);
-        $tipo_trabajador = TipoTrabajador::findOrFail($id);
-        $tipo_trabajador->delete();
-
-        return redirect()->route('tipo_trabajadores.index')->with('success', 'Eliminado correctamente');
+        try {
+            $tipo_trabajador = TipoTrabajador::findOrFail($id);
+            $tipo_trabajador->delete();
+            return redirect()->route('tipo_trabajadores.index')->with('success', 'Tipo de trabajador eliminado correctamente');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('tipo_trabajadores.index')->with('error', 'No se puede eliminar el tipo de trabajador porque está relacionado con otros registros.');
+        }
     }
 }

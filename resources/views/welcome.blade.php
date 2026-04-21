@@ -116,7 +116,7 @@
                         Registra formularios para monitorear las actividades diarias de las unidades de limpieza, asegurando un control eficiente y una ciudad más limpia para todos.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="{{ route('login') }}" class="bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-10 rounded-xl shadow-xl shadow-brand-600/30 transition-all text-center uppercase tracking-widest">
+                        <a href="{{ route('formulario.index') }}" class="bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-10 rounded-xl shadow-xl shadow-brand-600/30 transition-all text-center uppercase tracking-widest">
                             Entrar al sistema
                         </a>
                     </div>

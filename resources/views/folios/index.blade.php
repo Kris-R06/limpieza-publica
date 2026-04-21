@@ -26,7 +26,6 @@
                         <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] border-b border-gray-100 w-32">Folio ID</th>
                         <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] border-b border-gray-100">Fecha de Generación</th>
                         <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] border-b border-gray-100">Registro Asociado</th>
-                        <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] border-b border-gray-100 text-right">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
@@ -66,23 +65,6 @@
                             </span>
                         @endif
                     </td>
-
-                        {{-- ACCIONES --}}
-                        <td class="px-6 py-4 text-right">
-                            <div class="inline-flex items-center gap-2">
-                                {{-- Botón Eliminar / Cancelar --}}
-                                <form action="#" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" 
-                                            onclick="return confirm('ATENCIÓN: ¿Estás seguro de invalidar este folio? Esta acción quedará registrada.')"
-                                            class="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-all"
-                                            title="Invalidar Folio">
-                                        <i class="ph ph-prohibit text-xl"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
                     </tr>
                     @empty
                     <tr>

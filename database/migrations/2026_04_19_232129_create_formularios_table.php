@@ -14,15 +14,15 @@ return new class extends Migration
             $table->date('fecha_orden');
             $table->dateTime('fecha_captura');
             //relaciones
-            $table->foreignId('id_turno')->constrained('turnos');
-            $table->foreignId('id_tipo_unidad')->constrained('tipo_unidades');
-            $table->foreignId('id_unidad')->constrained('unidades');
-            $table->foreignId('id_ruta')->constrained('rutas');
+            $table->foreignId('id_turno')->constrained('turnos')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('id_tipo_unidad')->constrained('tipo_unidades')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('id_unidad')->constrained('unidades')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('id_ruta')->constrained('rutas')->onDelete('restrict')->onUpdate('restrict');
             //chofer y despachador
-            $table->foreignId('id_chofer')->constrained('trabajadores');
-            $table->foreignId('id_despachador')->constrained('trabajadores');
+            $table->foreignId('id_chofer')->constrained('trabajadores')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('id_despachador')->constrained('trabajadores')->onDelete('restrict')->onUpdate('restrict');
             //usuario que captura el formulario
-            $table->foreignId('id_usuario')->constrained('users');
+            $table->foreignId('id_usuario')->constrained('users')->onDelete('restrict')->onUpdate('restrict');
             //Datos
             $table->decimal('cantidad_kg', 8, 2)->default(0);
             $table->integer('puches')->default(0);

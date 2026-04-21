@@ -60,10 +60,12 @@ class TurnoController extends Controller
 
     public function destroy($id)
     {
-        // Turno::destroy($id);
-        $turno = Turno::findOrFail($id);
-        $turno->delete();
-
-        return redirect()->route('turnos.index')->with('success', 'Turno eliminado correctamente');
+        try {
+            $turno = Turno::findOrFail($id);
+            $turno->delete();
+            return redirect()->route('turnos.index')->with('success', 'Turno eliminado correctamente');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('turnos.index')->with('error', 'No se puede eliminar el turno porque está relacionado con otros registros.');
+        }
     }
 }
