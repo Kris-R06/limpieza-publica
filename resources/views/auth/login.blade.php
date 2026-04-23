@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso | EcoRegistro</title>
+    <title>{{ $pageTitle ?? 'sudo-Trash' }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
+
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -23,7 +26,7 @@
 </head>
 <body class="bg-eco-light text-gray-800 font-sans antialiased min-h-screen flex items-center justify-center p-4">
 
-    <main class="bg-white rounded-2xl shadow-xl flex w-full max-w-5xl overflow-hidden min-h-[600px]">
+    <main class="bg-white rounded-2xl shadow-xl flex w-full max-w-5xl overflow-hidden min-h-100vh">
         
         <section class="hidden md:block md:w-1/2 relative">
             <div class="absolute inset-0 bg-eco-dark/30 z-10 mix-blend-multiply"></div>
@@ -50,20 +53,21 @@
                     <p class="text-gray-500 mt-2">Ingresa tus credenciales para acceder al sistema</p>
                 </div>
 
-                <form action="#" method="POST" class="space-y-6">
+                <form action="{{ route('login') }}" method="POST" class="space-y-6">
+                    @csrf
                     <div>
-                        <label for="login-email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                        <input type="email" id="login-email" name="email" required 
+                        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required 
                             class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors" 
-                            placeholder="operador@ciudad.gob">
+                            placeholder="operador@gmail.com">
                     </div>
 
                     <div>
                         <div class="flex justify-between items-center">
-                            <label for="login-password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                            <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
                             <a href="#" class="text-sm font-medium text-eco hover:text-green-700">¿Olvidaste tu contraseña?</a>
                         </div>
-                        <input type="password" id="login-password" name="password" required 
+                        <input type="password" id="password" name="password" required 
                             class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors" 
                             placeholder="••••••••">
                     </div>
@@ -85,41 +89,40 @@
                     <p class="text-gray-500 mt-2">Registra tus datos para operar en el sistema</p>
                 </div>
 
-                <form action="#" method="POST" class="space-y-4">
+                <form action="{{ route('register') }}" method="POST" class="space-y-4">
+                    @csrf
                     <div>
-                        <label for="reg-nombre" class="block text-sm font-medium text-gray-700">Nombre(s)</label>
-                        <input type="text" id="reg-nombre" name="nombre" required 
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nombre(s)</label>
+                        <input type="text" id="name" name="name" required 
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
+                    </div>
+
+                    <div>
+                        <label for="lastname" class="block text-sm font-medium text-gray-700">Apellidos</label>
+                        <input type="text" id="lastname" name="lastname" required 
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
+                    </div>
+                    <!---<div>
+                        <label for="reg-materno" class="block text-sm font-medium text-gray-700">Apellido Materno</label>
+                        <input type="text" id="reg-materno" name="apellidoMaterno" required 
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
+                    </div>--->
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required 
                             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label for="reg-paterno" class="block text-sm font-medium text-gray-700">Apellido Paterno</label>
-                            <input type="text" id="reg-paterno" name="apellidoPaterno" required 
+                            <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                            <input type="password" id="password" name="password" required 
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
                         </div>
                         <div>
-                            <label for="reg-materno" class="block text-sm font-medium text-gray-700">Apellido Materno</label>
-                            <input type="text" id="reg-materno" name="apellidoMaterno" required 
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="reg-email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                        <input type="email" id="reg-email" name="email" required 
-                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label for="reg-password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                            <input type="password" id="reg-password" name="password" required 
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
-                        </div>
-                        <div>
-                            <label for="reg-confirm" class="block text-sm font-medium text-gray-700">Confirmar</label>
-                            <input type="password" id="reg-confirm" name="confirmPassword" required 
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar</label>
+                            <input type="password" id="password_confirmation" name="password_confirmation" required 
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-eco focus:border-eco outline-none transition-colors">
                         </div>
                     </div>
