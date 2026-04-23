@@ -60,8 +60,8 @@
                                 Formulario #{{ str_pad($folio->formulario->id, 3, '0', STR_PAD_LEFT) }}
                             </a>
                         @else
-                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wide italic">
-                                Sin enlace
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-wide italic">
+                                Formulario eliminado.
                             </span>
                         @endif
                     </td>
