@@ -6,7 +6,6 @@
     <title>{{ $pageTitle ?? 'sudo-Trash' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
 
-    {{-- Fuentes: Estandarizamos a Barlow para todo el proyecto --}}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />

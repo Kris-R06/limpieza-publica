@@ -302,7 +302,7 @@ class FormularioController extends Controller
         
         //Información
         $mensaje = "{$icono} *ALERTA SUDO-TRASH* \n\n";
-        $mensaje .= "Se ha *{$accion}* un registsro en la base de datos:\n\n";
+        $mensaje .= "Se ha *{$accion}* un registro en la base de datos:\n\n";
         $mensaje .= "📄 *Folio:* #{$formulario->id}\n";
         $mensaje .= "📅 *Fecha de Captura:* {$formulario->fecha_captura}\n";
         $mensaje .= "---------------------------\n";
@@ -310,10 +310,12 @@ class FormularioController extends Controller
         $mensaje .= "🛣️ *Ruta:* {$formulario->ruta->numero}\n";
         $mensaje .= "👨‍✈️ *Chofer:* {$formulario->chofer->nombre}\n";
         $mensaje .= "📉 *Cobertura:* {$formulario->porcentaje_realizado}%\n";
+        $mensaje .= "🕒 *Turno:* {$formulario->turno->horario}\n";
+        $mensaje .= "📍 *Comentarios:* {$formulario->comentarios}\n";
         $mensaje .= "---------------------------\n";
         $mensaje .= "👤 *Responsable:* {$usuario}";
         if ($accion === 'ELIMINADO') {
-            $mensaje .= "\n🕒 *Fecha y Hora (Sistema):* " . now()->format('d/m/Y H:i:s');
+            $mensaje .= "\n📅 *Fecha y Hora (Sistema):* " . now()->format('d/m/Y H:i:s');
         }
 
         //Mandar Mensaje
