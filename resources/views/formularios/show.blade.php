@@ -147,5 +147,14 @@
         </p>
     </div>
 
+    <div class="flex justify-end pt-4 mt-8 border-t border-gray-200">
+        {{-- Nota: target="_blank" abrirá el PDF en una pestaña nueva --}}
+        <a href="{{ route('formulario.pdf', $formulario->id) }}" target="_blank" 
+           class="inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-8 rounded-xl shadow-lg shadow-slate-800/20 transition-all uppercase text-[12px] tracking-widest">
+            <i class="ph ph-file-pdf text-xl text-red-400"></i>
+            Descargar Reporte PDF
+        </a>
+    </div>
+
 </div>
 @endsection
