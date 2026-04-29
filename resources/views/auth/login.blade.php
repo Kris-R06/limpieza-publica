@@ -33,10 +33,10 @@
             <div class="absolute inset-0 z-20 flex flex-col justify-center px-10 text-white">
                 <div class="flex items-center gap-2 mb-6">
                     <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    <h2 class="text-3xl font-bold">EcoRegistro</h2>
+                    <h2 class="text-3xl font-bold">Sudo-Trash</h2>
                 </div>
                 <h3 class="text-4xl font-extrabold mb-4 leading-tight">Únete al cambio verde.</h3>
-                <p class="text-lg text-green-50">Gestiona, monitorea y optimiza la limpieza pública de tu ciudad desde una sola plataforma.</p>
+                <p class="text-lg text-green-50">Gestiona, monitorea y optimiza la limpieza pública.</p>
             </div>
             <img 
                 src="https://lirp.cdn-website.com/777d988b/dms3rep/multi/opt/recoleccion-de-basura-programada-seredecom-1920w.jpg" 

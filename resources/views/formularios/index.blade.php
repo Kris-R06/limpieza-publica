@@ -9,12 +9,102 @@
             <h1 class="font-heading text-3xl sm:text-4xl font-extrabold text-brand-850 tracking-wide">Formularios</h1>
             <p class="text-sm text-slate-500">Historial de recolección y formularios de Sudo-Trash.</p>
         </div>
-        
-        <a href="{{ route('formulario.create') }}" 
-           class="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-lg shadow-brand-600/20 transition-all uppercase text-xs tracking-widest">
-            <i class="ph ph-plus-circle text-lg"></i>
-            Nuevo Registro
-        </a>
+        <div>
+            <button type="button" id="btn-toggle-filtros" 
+                class="inline-flex items-center justify-center gap-2 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold py-2.5 px-6 rounded-xl shadow-sm transition-all uppercase text-xs tracking-widest">
+                <i class="ph ph-funnel text-lg"></i>
+                Filtros
+            </button>
+            <a href="{{ route('formulario.create') }}" 
+            class="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-lg shadow-brand-600/20 transition-all uppercase text-xs tracking-widest">
+                <i class="ph ph-plus-circle text-lg"></i>
+                Nuevo Registro
+            </a>
+        </div>
+    </div>
+
+    <div id="panel-filtros" class="hidden mt-6 bg-white border border-slate-200 rounded-2xl shadow-sm p-6 transition-all duration-300">
+        <form action="{{ route('formulario.index') }}" method="GET">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                {{-- Folio --}}
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Folio</label>
+                    <input type="text" name="folio" placeholder="#0003" value="{{ request('folio') }}"
+                        class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-500/20 text-sm">
+                </div>
+
+                {{-- Rango de Fechas --}}
+                <div class="lg:col-span-2">
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Rango de Fecha (Orden)</label>
+                    <div class="flex items-center gap-2">
+                        <input type="date" name="fecha_inicio" value="{{ request('fecha_inicio') }}"
+                            class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-500/20 text-sm">
+                        <span class="text-slate-400 text-sm font-medium">a</span>
+                        <input type="date" name="fecha_fin" value="{{ request('fecha_fin') }}"
+                            class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-500/20 text-sm">
+                    </div>
+                </div>
+
+                {{-- Unidad --}}
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Unidad</label>
+                    <select name="unidad_id" class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-500/20 text-sm">
+                        <option value="">Todas</option>
+                        @foreach($unidades as $unidad)
+                            <option value="{{ $unidad->id }}" {{ request('unidad_id') == $unidad->id ? 'selected' : '' }}>{{ $unidad->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- Ruta --}}
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Ruta</label>
+                    <select name="id_ruta" class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-500/20 text-sm">
+                        <option value="">Todas</option>
+                        @foreach($rutas as $ruta)
+                            <option value="{{ $ruta->id }}" {{ request('id_ruta') == $ruta->id ? 'selected' : '' }}>Ruta {{ $ruta->numero }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- Chofer --}}
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Chofer</label>
+                    <select name="id_chofer" class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-500/20 text-sm">
+                        <option value="">Todos</option>
+                        @foreach($trabajadores as $trabajador)
+                            <option value="{{ $trabajador->id }}" {{ request('id_chofer') == $trabajador->id ? 'selected' : '' }}>
+                                {{ $trabajador->nombre }} {{ $trabajador->apellido }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- Despachador --}}
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Despachador</label>
+                    <select name="id_despachador" class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-500/20 text-sm">
+                        <option value="">Todos</option>
+                        @foreach($trabajadores as $trabajador)
+                            <option value="{{ $trabajador->id }}" {{ request('id_despachador') == $trabajador->id ? 'selected' : '' }}>
+                                {{ $trabajador->nombre }} {{ $trabajador->apellido }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- Botones de Acción --}}
+                <div class="flex items-end gap-3 h-full">
+                    <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 px-4 rounded-lg transition-colors text-sm">
+                        Aplicar
+                    </button>
+                    <a href="{{ route('formulario.index') }}" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-2.5 px-4 rounded-lg transition-colors text-sm text-center">
+                        Limpiar
+                    </a>
+                </div>
+            </div>
+        </form>
     </div>
 
     {{-- CARD PRINCIPAL CON TABLA --}}
@@ -130,4 +220,20 @@
         @endif
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btnFiltros = document.getElementById('btn-toggle-filtros');
+        const panelFiltros = document.getElementById('panel-filtros');
+
+        // Si ya hay filtros activos en la URL, mantenemos el panel abierto
+        if (window.location.search.length > 0) {
+            panelFiltros.classList.remove('hidden');
+        }
+
+        btnFiltros.addEventListener('click', function () {
+            panelFiltros.classList.toggle('hidden');
+        });
+    });
+</script>
 @endsection

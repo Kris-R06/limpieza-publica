@@ -105,6 +105,8 @@ Route::middleware('auth')->group(function () {
     
     #Rutas para la gestión de folios
     Route::get('/folios', [FolioController::class, 'index'])->name('folios.index');
+    #PDF
+    Route::get('/formularios/{id}/pdf', [FormularioController::class, 'generarPDF'])->name('formulario.pdf');
 
     #Rutas para APIs
     Route::get('/api/rutas/{id}/colonias', function ($id) {

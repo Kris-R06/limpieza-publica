@@ -18,10 +18,37 @@ use ILLuminate\Support\Facades\DB;
 
 class FormularioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $formularios = Formulario::paginate (10);
-        return view('formularios.index', compact('formularios'));
+        // 1. Cargamos las relaciones exactas que definimos en el modelo
+        $query = Formulario::with(['unidad', 'ruta', 'chofer', 'despachador']);
+
+        // 2. Filtros de Folio y Fechas (igual que antes)
+        $query->when($request->filled('folio'), function ($q) use ($request) {
+            $q->where('id', 'like', '%' . str_replace('#', '', $request->folio) . '%');
+        });
+
+        $query->when($request->filled('fecha_inicio') && $request->filled('fecha_fin'), function ($q) use ($request) {
+            $q->whereBetween('fecha_orden', [$request->fecha_inicio, $request->fecha_fin]);
+        });
+
+        // 3. Filtros exactos de llaves foráneas
+        $query->when($request->filled('id_unidad'), fn($q) => $q->where('id_unidad', $request->id_unidad));
+        $query->when($request->filled('id_ruta'), fn($q) => $q->where('id_ruta', $request->id_ruta));
+        
+        // Filtros separados para los trabajadores según su rol en este formulario
+        $query->when($request->filled('id_chofer'), fn($q) => $q->where('id_chofer', $request->id_chofer));
+        $query->when($request->filled('id_despachador'), fn($q) => $q->where('id_despachador', $request->id_despachador));
+
+        // 4. Paginación
+        $formularios = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+
+        // 5. Catálogos para los selects
+        $unidades = Unidad::all();
+        $rutas = Ruta::all();
+        $trabajadores = Trabajador::all(); 
+
+        return view('formularios.index', compact('formularios', 'unidades', 'rutas', 'trabajadores'));
     }
 
     public function create()
@@ -121,7 +148,7 @@ class FormularioController extends Controller
             
             // Estadística
             $formulario->year                 = now()->format('Y');
-            $formulario->month                = now()->translatedFormat('F'); // "Abril"
+            $formulario->month                = now()->translatedFormat('F');
             $formulario->day                  = now()->format('d');
             $formulario->suma_porcentaje      = $request->suma_porcentajes ?? 0;
             $formulario->cant_colonias        = $request->cantidad_colonias ?? 0;
@@ -142,7 +169,9 @@ class FormularioController extends Controller
 
             // Si todo está bien, guardamos cambios permanentemente
             \DB::commit();
-
+            
+            $formulario = Formulario::with(['unidad', 'ruta', 'chofer'])->find($formulario->id);
+            $this->notificarTelegram('CREADO', $formulario);
             return redirect()->route('formulario.index')
                             ->with('success', "¡Registro Guardado con éxito! Folio: #{$nuevoFolioId}");
 
@@ -180,11 +209,11 @@ class FormularioController extends Controller
         // Asegúrate de que en tu tabla 'unidades' la columna se llame 'tipo_unidad_id'
         $tipoActualId = $formulario->unidad->tipo_unidad_id; 
 
-        $turnos = \App\Models\Turno::all();
-        $rutas = \App\Models\Ruta::all();
-        $despachadores = \App\Models\Trabajador::where('tipo_trabajador_id', 2)->get();
-        $choferes = \App\Models\Trabajador::where('tipo_trabajador_id', 1)->get();
-        $tipos_unidades = \App\Models\TipoUnidad::all();
+        $turnos = Turno::all();
+        $rutas = Ruta::all();
+        $despachadores = Trabajador::where('tipo_trabajador_id', 2)->get();
+        $choferes = Trabajador::where('tipo_trabajador_id', 1)->get();
+        $tipos_unidades = TipoUnidad::all();
         
         // Cargamos solo las unidades que pertenecen a ese tipo para que el select no esté vacío
         $unidades = \App\Models\Unidad::where('tipo_unidad_id', $tipoActualId)->get();
@@ -248,6 +277,7 @@ class FormularioController extends Controller
     {
         try {
             $formulario = Formulario::findOrFail($id);
+            $this->notificarTelegram('ELIMINADO', $formulario);
             // Desacoplamos las colonias primero para no dejar basura en la tabla pivote
             $formulario->colonias()->detach();
             $formulario->delete();
@@ -256,5 +286,60 @@ class FormularioController extends Controller
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'No se pudo eliminar: ' . $e->getMessage()]);
         }
+    }
+
+    // API TELEGRAM
+    private function notificarTelegram($accion, $formulario)
+    {
+        $telegramToken = env('TELEGRAM_BOT_TOKEN');
+        $chatId = env('TELEGRAM_CHAT_ID');
+
+        //Usuario
+        $usuario = auth()->user() ? auth()->user()->name . ' ' . auth()->user()->lastname : 'Sistema Automático';
+        
+        //Lo que pasó
+        $icono = $accion === 'CREADO' ? '✅' : '🗑️';
+        
+        //Información
+        $mensaje = "{$icono} *ALERTA SUDO-TRASH* \n\n";
+        $mensaje .= "Se ha *{$accion}* un registro en la base de datos:\n\n";
+        $mensaje .= "📄 *Folio:* #{$formulario->id}\n";
+        $mensaje .= "📅 *Fecha de Captura:* {$formulario->fecha_captura}\n";
+        $mensaje .= "---------------------------\n";
+        $mensaje .= "🚛 *Unidad:* {$formulario->unidad->nombre}\n";
+        $mensaje .= "🛣️ *Ruta:* {$formulario->ruta->numero}\n";
+        $mensaje .= "👨‍✈️ *Chofer:* {$formulario->chofer->nombre}\n";
+        $mensaje .= "📉 *Cobertura:* {$formulario->porcentaje_realizado}%\n";
+        $mensaje .= "🕒 *Turno:* {$formulario->turno->horario}\n";
+        $mensaje .= "📍 *Comentarios:* {$formulario->comentarios}\n";
+        $mensaje .= "---------------------------\n";
+        $mensaje .= "👤 *Responsable:* {$usuario}";
+        if ($accion === 'ELIMINADO') {
+            $mensaje .= "\n📅 *Fecha y Hora (Sistema):* " . now()->format('d/m/Y H:i:s');
+        }
+
+        //Mandar Mensaje
+        try {
+            \Illuminate\Support\Facades\Http::post("https://api.telegram.org/bot{$telegramToken}/sendMessage", [
+                'chat_id' => $chatId,
+                'text'    => $mensaje,
+                'parse_mode' => 'Markdown'
+            ]);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error("Fallo Telegram: " . $e->getMessage());
+        }
+    }
+
+    //pdf
+    public function generarPDF($id)
+    {
+        // Carga todas las relaciones para que no den error de 'null' en el PDF
+        $formulario = Formulario::with(['unidad.tipo', 'ruta', 'chofer', 'despachador', 'turno', 'usuario', 'colonias'])->findOrFail($id);
+        
+        // Llamamos a la vista que acabamos de crear
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('formularios.pdf', compact('formulario'));
+        
+        // El método stream abre el PDF en el navegador, download lo descarga directo
+        return $pdf->stream('Reporte_Folio_'.$formulario->id.'.pdf');
     }
 }
